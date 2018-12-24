@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart} from 'angular-highcharts';
 
+interface IGraphValue {
+  value: number;
+  xText: string;
+  yText: string;
+  badge: any;
+  dataContext: string;
+}
 @Component({
   selector: 'app-graph-component',
   templateUrl: './graph-component.component.html',
