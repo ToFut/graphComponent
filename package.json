@@ -20,6 +20,9 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "@rijine/ngx-highcharts": "^0.7.2",
+    "@types/highcharts": "^5.0.36",
+    "angular-highcharts": "^6.2.6",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
