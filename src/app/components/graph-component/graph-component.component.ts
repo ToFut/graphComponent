@@ -1,62 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart} from 'angular-highcharts';
+import {IData, IGraphValue, json} from '../models/outcome.model';
 
-interface IGraphValue {
-  value: number;
-  xText: string;
-  yText: string;
-  badge: any;
-  dataContext: string;
-}
 @Component({
   selector: 'app-graph-component',
   templateUrl: './graph-component.component.html',
   styleUrls: ['./graph-component.component.css']
 })
 export class GraphComponentComponent implements OnInit {
-  demo: IGraphValue[] = [{
-    value: 1750,
-    xText: 'היום',
-    yText: '1750',
-    badge: 'url(../assets/crown.png)',
-    dataContext: '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : {point.x} </td> </tr>' +
-    '<tr><td style="text-align: right"> דיוק בחירה: {point.y}% </td></tr>',
-  } ,
-    {
-      value: 123,
-      xText: 'אתמול',
-      yText: '1750',
-      badge: 'circle',
-      dataContext: '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : {point.x} </td> </tr>' +
-      '<tr><td style="text-align: right"> דיוק בחירה: {point.y}% </td></tr>',
-    },
-    {
-      value: 1375,
-      xText: '26/09/2016',
-      yText: '1750',
-      badge: 'url(../assets/crown.png)',
-      dataContext: '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : {point.x} </td> </tr>' +
-      '<tr><td style="text-align: right"> דיוק בחירה: {point.y}% </td></tr>',
-    },
-    {
-      value: 941,
-      xText: '24/09/2018',
-      yText: '1750',
-      badge: 'url(../assets/crown.png)',
-      dataContext: '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : {point.x} </td> </tr>' +
-      '<tr><td style="text-align: right"> דיוק בחירה: {point.y}% </td></tr>',
-    },
-    {
-      value: 941,
-      xText: '21/09/2018',
-      yText: '1750',
-      badge: 'url(../assets/crown.png)',
-      dataContext: '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : {point.x} </td> </tr>' +
-      '<tr><td style="text-align: right"> דיוק בחירה: {point.y}% </td></tr>',
-    }];
+  demo: IGraphValue[] = json;
+  dataList: IData[] = [];
   chart = new Chart();
 
   constructor() {
+    this.manageData();
     this.chart = new Chart({
       chart: {
         type: 'line'
@@ -74,7 +31,7 @@ export class GraphComponentComponent implements OnInit {
       }],
       xAxis: { // --- Primary xAxis
         title: {text: 'xAxis'},
-        categories: [this.demo[0].xText, this.demo[1].xText, this.demo[2].xText, this.demo[3].xText, this.demo[4].xText],  // --- Data from json
+        categories: this.demo.map(ele => ele.xText),  // --- Data from json
         tickInterval: 1,
       },
       plotOptions: {
@@ -101,7 +58,8 @@ export class GraphComponentComponent implements OnInit {
         shared: true,
         useHTML: true,
         headerFormat: '<small style="text-align: right; color: black;">{point.key}</small><table>',
-        pointFormat: this.demo[0].dataContext, // generic dataContext for all elements
+        pointFormat: '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : {point.x} </td> </tr>' +
+        '<tr><td style="text-align: right"> דיוק בחירה: {point.y}% </td></tr>', // generic dataContext for all elements
         footerFormat: '</table>',
         valueDecimals: 3
       },
@@ -112,21 +70,23 @@ export class GraphComponentComponent implements OnInit {
       series: [  // --- data
         {
           name: 'Demo json',
-          data: [{
-            y: this.demo[0].value,
-            marker: {
-              symbol: this.demo[0].badge
-            }
-          } , this.demo[1].value, this.demo[2].value, this.demo[3].value], // --- data
-          marker: {
-            symbol: this.demo[1].badge
-          }
-        }
-      ]
+          data: this.dataList,
+        }]
     });
   }
 
   ngOnInit() {
+  }
+
+  manageData() {
+    this.demo.forEach(ele => {
+      this.dataList.push({
+        y: ele.value,
+        marker: {
+          symbol: ele.badge,
+        },
+      });
+    });
   }
 
   add() {
