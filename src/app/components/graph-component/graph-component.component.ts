@@ -57,13 +57,12 @@ export class GraphComponentComponent implements OnInit {
       tooltip: {
         shared: true,
         useHTML: true,
-        headerFormat: '<small style="text-align: right; color: black;">{point.key}</small><table>',
-        pointFormat: '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : {point.x} </td> </tr>' +
-        '<tr><td style="text-align: right"> דיוק בחירה: {point.y}% </td></tr>', // generic dataContext for all elements
+        headerFormat: '<small style="text-align: right; color: black;">{point.x}%</small><table>',
+        pointFormat: '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : {point.name}</td> </tr>' +
+        '<tr><td style="text-align: right"> דיוק בחירה: {point.name}% </td></tr>', // generic dataContext for all elements
         footerFormat: '</table>',
         valueDecimals: 3
       },
-
       credits: {
         enabled: false
       },
@@ -81,6 +80,7 @@ export class GraphComponentComponent implements OnInit {
   manageData() {
     this.demo.forEach(ele => {
       this.dataList.push({
+        name: ele.dataContext,
         y: ele.value,
         marker: {
           symbol: ele.badge,
