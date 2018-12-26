@@ -8,8 +8,8 @@ import {IData, IGraphValue, json} from '../models/outcome.model';
   styleUrls: ['./graph-component.component.css']
 })
 export class GraphComponentComponent implements OnInit {
-  @Input() point: string;
-  @Input() demo: IGraphValue[];
+  @Input() tooltiptemlate : string;
+  @Input() data: IGraphValue[];
   dataList: IData[] = [];
   chart = new Chart();
 
@@ -35,7 +35,7 @@ export class GraphComponentComponent implements OnInit {
       }],
       xAxis: { // --- Primary xAxis
         title: {text: 'xAxis'},
-        categories: this.demo.map(ele => ele.xText),  // --- Data from json
+        categories: this.data.map(ele => ele.xText),  // --- Data from json
         tickInterval: 1,
       },
       plotOptions: {
@@ -49,7 +49,7 @@ export class GraphComponentComponent implements OnInit {
         shared: true,
         useHTML: true,
         headerFormat: '<small style="text-align: right; color: black;">{point.x}</small><table>',
-        pointFormat: this.point , // generic dataContext for all elements
+        pointFormat: this.tooltiptemlate  , // generic dataContext for all elements
         valueDecimals: 3
       },
       responsive: { // responsive view
@@ -78,7 +78,7 @@ export class GraphComponentComponent implements OnInit {
   }
 
   manageData() {
-    this.demo.forEach(ele => {
+    this.data.forEach(ele => {
       this.dataList.push({
         name: ele.dataContext,
         y: ele.value,
