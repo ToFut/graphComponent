@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Chart} from 'angular-highcharts';
 import {IData, IGraphValue, json} from '../models/outcome.model';
 
@@ -8,11 +8,15 @@ import {IData, IGraphValue, json} from '../models/outcome.model';
   styleUrls: ['./graph-component.component.css']
 })
 export class GraphComponentComponent implements OnInit {
-  demo: IGraphValue[] = json;
+  @Input() point: string;
+  @Input() demo: IGraphValue[];
   dataList: IData[] = [];
   chart = new Chart();
 
   constructor() {
+  }
+
+  ngOnInit() {
     this.manageData();
     this.chart = new Chart({
       chart: {
@@ -41,7 +45,13 @@ export class GraphComponentComponent implements OnInit {
           }
         }
       },
-
+      tooltip: {
+        shared: true,
+        useHTML: true,
+        headerFormat: '<small style="text-align: right; color: black;">{point.x}</small><table>',
+        pointFormat: this.point , // generic dataContext for all elements
+        valueDecimals: 3
+      },
       responsive: { // responsive view
         rules: [{
           condition: {
@@ -54,15 +64,6 @@ export class GraphComponentComponent implements OnInit {
           }
         }]
       },
-      tooltip: {
-        shared: true,
-        useHTML: true,
-        headerFormat: '<small style="text-align: right; color: black;">{point.x}%</small><table>',
-        pointFormat: '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : {point.name}</td> </tr>' +
-        '<tr><td style="text-align: right"> דיוק בחירה: {point.name}% </td></tr>', // generic dataContext for all elements
-        footerFormat: '</table>',
-        valueDecimals: 3
-      },
       credits: {
         enabled: false
       },
@@ -70,11 +71,10 @@ export class GraphComponentComponent implements OnInit {
         {
           name: 'Demo json',
           data: this.dataList,
+
         }]
     });
-  }
 
-  ngOnInit() {
   }
 
   manageData() {
