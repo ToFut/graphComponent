@@ -3,7 +3,7 @@ export interface IGraphValue {
   xText: string;
   yText: string;
   badge: any;
-  dataContext?: string;
+  dataContext?: { RTCorrectAvg: number, LongestStrack: number };
 }
 
 export interface IData {
@@ -18,14 +18,14 @@ export const json = [{
   xText: 'היום',
   yText: '1750',
   badge: 'url(../assets/crown.png)',
-  dataContext: '1',
+  dataContext: {RTCorrectAvg: 0.6, LongestStrack: 3},
 },
   {
     value: 123,
     xText: 'אתמול',
     yText: '1750',
     badge: 'circle',
-    dataContext: '2',
+    dataContext: {RTCorrectAvg: 0.67, LongestStrack: 1232},
 
   },
   {
@@ -33,7 +33,7 @@ export const json = [{
     xText: '26/09/2016',
     yText: '1750',
     badge: 'circle',
-    dataContext: '3',
+    dataContext: {RTCorrectAvg: 0.143, LongestStrack: 164},
 
   },
   {
@@ -41,7 +41,7 @@ export const json = [{
     xText: '24/09/2018',
     yText: '1750',
     badge: 'circle',
-    dataContext: '4',
+    dataContext: {RTCorrectAvg: 0.343, LongestStrack: 22},
 
   },
   {
@@ -49,6 +49,6 @@ export const json = [{
     xText: '21/09/2018',
     yText: '1750',
     badge: 'circle',
-    dataContext:  '5',
+    dataContext: {RTCorrectAvg: 0.21, LongestStrack: 12},
 
   }]

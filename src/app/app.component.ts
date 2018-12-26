@@ -9,9 +9,14 @@ import {json} from './components/models/outcome.model';
 export class AppComponent {
   title = 'GraphComponent';
   data = json;
-  text: string;
+  text2first: string;
+  text2second: string;
+
   constructor() {
-    this.text = '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת : ' + this.data[0].dataContext +  '</td> </tr>' +
-      '<tr><td style="text-align: right"> דיוק בחירה: ' + this.data[1].dataContext + '</td></tr> </table>';
+    this.text2first = '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת :  {point.name} </td> </tr>' +
+      '<tr><td style="text-align: right"> דיוק בחירה:  + {point.name} </td></tr> </table>';
+    this.text2second = '<tr><td style="color: {series.color}">כמות הפריטים המקסימלי שזכרת :  {point.name} </td> </tr>' +
+      '<tr><td style="text-align: right"> דיוק בחירה:  + {point.name} </td></tr> </table>';
+
   }
 }

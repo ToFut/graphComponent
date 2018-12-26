@@ -8,8 +8,10 @@ import {IData, IGraphValue, json} from '../models/outcome.model';
   styleUrls: ['./graph-component.component.css']
 })
 export class GraphComponentComponent implements OnInit {
-  @Input() tooltiptemlate : string;
+  @Input() tooltiptemlate: string;
   @Input() data: IGraphValue[];
+  @Input() tooltipType: string;
+
   dataList: IData[] = [];
   chart = new Chart();
 
@@ -80,7 +82,7 @@ export class GraphComponentComponent implements OnInit {
   manageData() {
     this.data.forEach(ele => {
       this.dataList.push({
-        name: ele.dataContext,
+        name: ele.dataContext[this.tooltipType],
         y: ele.value,
         marker: {
           symbol: ele.badge,
