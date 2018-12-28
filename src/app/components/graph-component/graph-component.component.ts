@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Chart} from 'angular-highcharts';
 import {IData, IGraphValue, json} from '../models/outcome.model';
+import {IndividualSeriesOptions} from "highcharts";
 
 @Component({
   selector: 'app-graph-component',
@@ -12,7 +13,7 @@ export class GraphComponentComponent implements OnInit {
   @Input() data: IGraphValue[];
   @Input() tooltipType: string;
 
-  dataList: IData[] = [];
+  dataList: IndividualSeriesOptions[] = [];
   chart = new Chart();
 
   constructor() {
@@ -53,6 +54,7 @@ export class GraphComponentComponent implements OnInit {
         headerFormat: '<small style="text-align: right; color: black;">{point.x}</small><table>',
         pointFormat: this.tooltiptemlate  , // generic dataContext for all elements
         valueDecimals: 3
+
       },
       responsive: { // responsive view
         rules: [{
@@ -71,7 +73,6 @@ export class GraphComponentComponent implements OnInit {
       },
       series: [  // --- data
         {
-          name: 'Demo json',
           data: this.dataList,
 
         }]
@@ -82,7 +83,7 @@ export class GraphComponentComponent implements OnInit {
   manageData() {
     this.data.forEach(ele => {
       this.dataList.push({
-        name: ele.dataContext[this.tooltipType],
+        name: {RTC: ele.dataContext['RTCorrectAvg'] , Long: ele.dataContext['LongestStrack'] , Short: ele.dataContext['Short']},
         y: ele.value,
         marker: {
           symbol: ele.badge,

@@ -3,13 +3,13 @@ export interface IGraphValue {
   xText: string;
   yText: string;
   badge: any;
-  dataContext?: { RTCorrectAvg: number, LongestStrack: number };
+  dataContext?: { RTCorrectAvg?: number, LongestStrack?: number , Short?: number };
 }
 
 export interface IData {
   y: number;
   marker: { symbol: string };
-  name?: string;
+  name?: {};
 
 }
 
@@ -18,14 +18,14 @@ export const json = [{
   xText: 'היום',
   yText: '1750',
   badge: 'url(../assets/crown.png)',
-  dataContext: {RTCorrectAvg: 0.6, LongestStrack: 3},
+  dataContext: {RTCorrectAvg: 0.6, LongestStrack: 3 , Short: 9.6},
 },
   {
     value: 123,
     xText: 'אתמול',
     yText: '1750',
     badge: 'circle',
-    dataContext: {RTCorrectAvg: 0.67, LongestStrack: 1232},
+    dataContext: {RTCorrectAvg: 0.67, LongestStrack: 1232 , Short: 2.6},
 
   },
   {
@@ -33,7 +33,7 @@ export const json = [{
     xText: '26/09/2016',
     yText: '1750',
     badge: 'circle',
-    dataContext: {RTCorrectAvg: 0.143, LongestStrack: 164},
+    dataContext: {RTCorrectAvg: 0.143, LongestStrack: 164 , Short: 4.6},
 
   },
   {
@@ -41,7 +41,7 @@ export const json = [{
     xText: '24/09/2018',
     yText: '1750',
     badge: 'circle',
-    dataContext: {RTCorrectAvg: 0.343, LongestStrack: 22},
+    dataContext: {RTCorrectAvg: 0.343, LongestStrack: 22 , Short: 6.6},
 
   },
   {
@@ -49,6 +49,6 @@ export const json = [{
     xText: '21/09/2018',
     yText: '1750',
     badge: 'circle',
-    dataContext: {RTCorrectAvg: 0.21, LongestStrack: 12},
+    dataContext: {RTCorrectAvg: 0.21, LongestStrack: 12 , Short: 8.6},
 
   }]
