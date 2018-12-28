@@ -83,7 +83,7 @@ export class GraphComponentComponent implements OnInit {
   manageData() {
     this.data.forEach(ele => {
       this.dataList.push({
-        name: {RTC: ele.dataContext['RTCorrectAvg'] , Long: ele.dataContext['LongestStrack'] , Short: ele.dataContext['Short']},
+        name: ele.dataContext,
         y: ele.value,
         marker: {
           symbol: ele.badge,
